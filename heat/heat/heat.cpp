@@ -88,13 +88,8 @@ void Direct(Vector<Vector<double> >& P, double C)
 		for (int i = (int)pow(2, k)-1; i < N; i += (int)pow(2, k + 1))
 		{
 			
-			int l = i - (int)pow(2, k) ;
+			int l = i - (int)pow(2, k);
 			int r = (i + (int)pow(2, k) > N) ? (N) : (i + (int)pow(2, k));
-			
-			//cout << l << endl;
-			//cout << i << endl;
-			//cout << r << endl;
-			
 			if (l >= 0) P[l] = P[l] + UoverU(r - i - 1, r - l - 1, P[i], C);
 			if (r < N) P[r] = P[r] + UoverU(i - l - 1, r - l - 1, P[i], C);
 		}
@@ -174,9 +169,13 @@ void printMat(Vector<Vector<double>> F)
 int main()
 {
 	double p = 1, c = 1, lambda = 1;
+	cout << "Enter N,M" << endl;
+	cin >> N >> M;
+	cout << "Enter p, c, lambda"<< endl;
+	cin >> p >> c >> lambda;
 	double a = p*c / lambda;
-	double h = 0.3, t = 0.01;
-	double C = a*h*h / t;
+	double h1 =1/(double)N, h2 = 1/ (double)M, t = 0.01;
+	double C = a*h1*h2 / t;
 
 	cout <<"C = "<< C << endl;
 
@@ -184,6 +183,8 @@ int main()
 	Vector<double> Pi;
 	Pi.assign(M, 1);
 	P.assign(N, Pi);
+
+
 
 	printMat(P);
 
