@@ -1,6 +1,3 @@
-﻿  stdafx.cpp
-  matrix.cpp
-  heat.cpp
-  Generating Code...
-  heat.vcxproj -> c:\users\kate\documents\visual studio 2015\Projects\heat\Debug\heat.exe
-  heat.vcxproj -> c:\users\kate\documents\visual studio 2015\Projects\heat\Debug\heat.pdb (Full PDB)
+﻿  heat.cpp
+  heat.vcxproj -> C:\Users\Kate\Documents\GitHub\heat_conduction_equation_solution\heat\Debug\heat.exe
+  heat.vcxproj -> C:\Users\Kate\Documents\GitHub\heat_conduction_equation_solution\heat\Debug\heat.pdb (Full PDB)
