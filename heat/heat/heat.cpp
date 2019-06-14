@@ -5,11 +5,12 @@
 #include "stdafx.h"
 #include <iostream>
 #include <math.h>
+#include "windows.h"
 #include "matrix.h"
 #include "matrix.cpp"
 const double pi = atan(1) * 4;
-int N = 6;
-int M = 6;
+int N = 7;
+int M = 7;
 
 
 using namespace std;
@@ -120,37 +121,41 @@ void Reverse(Vector<Vector<double> >& P, double C)
 	}
 }
 
-
-
-int main()
+Vector<Vector<double>> tick(Vector<Vector<double>> P, Vector<double> Tup, Vector<double> Tdown, Vector<double> Tleft, Vector<double> Tright, double C)
 {
-	Vector<Vector<double> > P;
-	Vector<double> Pi;
-	Pi.assign(M, 16);
-	P.assign(N, Pi);
-
-	Vector<double> Tup, Tdown, Tleft, Tright;
-	Tup.assign(M, 0);
-	Tdown.assign(M, 0);
-	Tleft.assign(N, 0);
-	Tright.assign(N, 0);
-
 	Vector<Vector<double>> F(P);
 	//////////////////////////////////////
-	for (int i = 0; i <= N-1; i++)
+
+	for (int i = 0; i < N; i++)
 	{
-		F[i][0] = F[i][0] + Tleft[i];
-		F[i][M-1] = F[i][M-1] + Tright[i];
+		for (int j = 0; j < M; j++)
+		{
+			F[i][j] = F[i][j] * C;
+		}
 	}
 
-	for (int j = 0; j <= M-1; j++)
+	for (int i = 0; i <= N - 1; i++)
+	{
+		F[i][0] = F[i][0] + Tleft[i];
+		F[i][M - 1] = F[i][M - 1] + Tright[i];
+	}
+
+	for (int j = 0; j <= M - 1; j++)
 	{
 		F[0][j] = F[0][j] + Tup[j];
-		F[N-1][j] = F[N-1][j] + Tdown[j];
+		F[N - 1][j] = F[N - 1][j] + Tdown[j];
 	}
 	//////////////////////////////////////
-	Direct(F, 4);
-	Reverse(F, 4);
+
+
+	Direct(F, C+4);
+	Reverse(F, C+4);
+	return F;
+}
+
+void printMat(Vector<Vector<double>> F)
+{
+	system("cls");
 	for (int i = 0; i < N; i++)
 	{
 		for (int j = 0; j < M; j++)
@@ -159,8 +164,44 @@ int main()
 		}
 		cout << endl;
 	}
-	char a;
-	cin >> a;
+
+	cout  << endl;
+	Sleep(1000);
+}
+
+
+
+int main()
+{
+	double p = 1, c = 1, lambda = 1;
+	double a = p*c / lambda;
+	double h = 0.3, t = 0.01;
+	double C = a*h*h / t;
+
+	cout <<"C = "<< C << endl;
+
+	Vector<Vector<double> > P ,F;
+	Vector<double> Pi;
+	Pi.assign(M, 1);
+	P.assign(N, Pi);
+
+	printMat(P);
+
+	Vector<double> Tup, Tdown, Tleft, Tright;
+	Tup.assign(M, 5);
+	Tdown.assign(M, 5);
+	Tleft.assign(N, 5);
+	Tright.assign(N, 5);
+
+	F = P;
+
+	while (true)
+	{
+		F = tick(F, Tup, Tdown, Tleft, Tright, C);
+		printMat(F);
+	}
+	char ch;
+	cin >> ch;
 	return 0;
 }
 
