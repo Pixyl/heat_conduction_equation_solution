@@ -1,3 +1,4 @@
 ﻿  heat.cpp
+c:\users\kate\documents\github\heat_conduction_equation_solution\heat\heat\heat.cpp(208): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
   heat.vcxproj -> C:\Users\Kate\Documents\GitHub\heat_conduction_equation_solution\heat\Debug\heat.exe
   heat.vcxproj -> C:\Users\Kate\Documents\GitHub\heat_conduction_equation_solution\heat\Debug\heat.pdb (Full PDB)
